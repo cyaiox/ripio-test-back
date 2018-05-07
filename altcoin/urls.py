@@ -17,9 +17,11 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
 from profiles.views import AuthToken
+from balance.views import TransferView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^api-token-auth/', AuthToken.as_view())
+    url(r'^api-token-auth/', AuthToken.as_view()),
+    path('transfers/', TransferView.as_view())
 ]
