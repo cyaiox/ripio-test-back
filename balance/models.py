@@ -2,11 +2,17 @@ from django.contrib.auth.models import User
 from django.db import models
 from coin.models import Coin
 import datetime
+import string
+import random
+
+
+def id_generator(size=6, chars=string.ascii_letters + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 
 # Create your models here.
 class Wallet(models.Model):
-    id = models.CharField(primary_key=True, max_length=6)
+    id = models.CharField(primary_key=True, max_length=6, default=id_generator)
     user = models.ForeignKey(User, related_name='account_user', on_delete=None)
     balance = models.IntegerField()
     escrow = models.IntegerField()
@@ -23,7 +29,7 @@ STATUS = (
 
 
 class Transfers(models.Model):
-    id = models.CharField(primary_key=True, max_length=12)
+    id = models.CharField(primary_key=True, max_length=6, default=id_generator)
     from_wallet = models.ForeignKey(Wallet, related_name='transfer_from_wallet', on_delete=None)
     to_wallet = models.ForeignKey(Wallet, related_name='transfer_to_wallet', on_delete=None)
     amount = models.IntegerField()
