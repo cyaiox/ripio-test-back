@@ -114,10 +114,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Django Rest Framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     )
 }
+
+# Celery
+CELERY_BROKER_URL = 'ampq://localhost'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
