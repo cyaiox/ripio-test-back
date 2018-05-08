@@ -114,8 +114,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Django Rest Framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'altcoin.authentication.ExpiringTokenAuthentication',        
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
     )
 }
 
