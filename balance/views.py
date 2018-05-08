@@ -6,12 +6,15 @@ from .serializer import TransferSerializer
 
 
 class TransferView(APIView):
-    def get(self, request, pk='zmjqgF'):
-        transfers = Transfers.objects.filter(
-            from_wallet=Wallet.objects.get(pk=pk)
-        )
+    def get(self, request, wallet=None):
+        if wallet:
+            transfers = Transfers.objects.filter(
+                from_wallet=Wallet.objects.get(pk=wallet)
+            )
         
-        if transfers:        
-            return Response(TransferSerializer(transfers))
+            if transfers:        
+                return Response(TransferSerializer(transfers, many=True).data)
 
-        return Response({"error": "nothing to see here"})
+            return Response({"error": "nothing to see here."})
+        
+        return Response({"error": "The wallet must be provided."})

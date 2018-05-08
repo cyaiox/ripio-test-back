@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
 from profiles.views import AuthToken
@@ -22,6 +22,7 @@ from balance.views import TransferView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^api-token-auth/', AuthToken.as_view()),
-    path('transfers/', TransferView.as_view())
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-token-auth/', AuthToken.as_view()),
+    path('transfers/<wallet>/', TransferView.as_view())
 ]
