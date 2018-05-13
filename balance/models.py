@@ -14,8 +14,8 @@ def id_generator(size=6, chars=string.ascii_letters + string.digits):
 class Wallet(models.Model):
     id = models.CharField(primary_key=True, max_length=6, default=id_generator)
     user = models.ForeignKey(User, related_name='account_user', on_delete=None)
-    balance = models.IntegerField()
-    escrow = models.IntegerField()
+    balance = models.IntegerField(default=0)
+    escrow = models.IntegerField(default=0)
     coin = models.ForeignKey(Coin, related_name='wallet_coin', on_delete=None)
 
     def __str__(self):
