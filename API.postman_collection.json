@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "fddbe7d0-c0f4-417f-bf8f-40efe8dd3ec7",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Balance",
+			"description": "",
+			"item": [
+				{
+					"name": "Transfers",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 22cbe6823d15c6307f5240968edd99a5ae65c12a"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "localhost:8000/transfers/zmjqgF/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"transfers",
+								"zmjqgF",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transfers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 22cbe6823d15c6307f5240968edd99a5ae65c12a"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"from_wallet\": \"zmjqgF\",\n\t\"to_wallet\": \"o7cexL\",\n\t\"amount\": 800\n}"
+						},
+						"url": {
+							"raw": "localhost:8000/transfers/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"transfers",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "get api-token-auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "admin",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "abcd1234+",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api-token-auth/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api-token-auth",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

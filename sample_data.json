@@ -1,0 +1,50 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 10,
+    "fields": {
+      "first_name": "Gabriel",
+      "last_name": "Diaz",
+      "email": "gabrieldiaz31@gmail.com",
+      "username": "gabo",
+      "password": "abcd1234+"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 20,
+    "fields": {
+      "first_name": "Eliger",
+      "last_name": "Roa",
+      "email": "eliger13@gmail.com",
+      "username": "eli13",
+      "password": "abcd1234+"
+    }
+  },
+  {
+    "model": "coin.coin",
+    "pk": 1,
+    "fields": {
+      "name": "water",
+      "description": "the new water coin",
+      "symbol": "WT"
+    }
+  },
+  {
+    "model": "balance.wallet",
+    "pk": "AbCdEf",
+    "fields": {
+      "user": 10,
+      "coin": 1
+    }
+  },
+  {
+    "model": "balance.wallet",
+    "pk": "FeDcBa",
+    "fields": {
+      "user": 20,
+      "coin": 1,
+      "balance": 300
+    }
+  }
+]

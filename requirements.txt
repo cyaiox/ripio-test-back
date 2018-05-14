@@ -5,4 +5,6 @@ pytz==2018.4
 djangorestframework
 markdown
 django-filter
-Celery
+Celery==4.1.0
+amqp==2.2.2
+django-redis
