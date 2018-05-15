@@ -138,6 +138,8 @@ CACHES = {
         'LOCATION': 'redis://127.0.0.1:6379/0',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            "SERIALIZER": "django_redis.serializers.msgpack.MSGPackSerializer",
+            "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor"
         },
     }
 }

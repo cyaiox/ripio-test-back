@@ -29,33 +29,12 @@ class TransferView(APIView):
         if request.POST or request.data:
             data = request.POST or request.data
 
-            resp = transfer_money_between_wallets.delay(
+            transfer_money_between_wallets.delay(
                 data['from_wallet'],
                 data['to_wallet'],
                 data['amount']
             )
 
-            return Response({"data": "waiting"})
-            # try:
-            #     from_wallet = Wallet.objects.get(pk=data['from_wallet'])
-            #     to_wallet = Wallet.objects.get(pk=data['to_wallet'])
-            #
-            #     if from_wallet.balance - (data['amount'] + from_wallet.escrow) >= 0:
-            #         Transfers(from_wallet=from_wallet,
-            #                   to_wallet=to_wallet,
-            #                   amount=data['amount'],
-            #                   status='A').save()
-            #
-            #         from_wallet.balance -= data['amount']
-            #         from_wallet.save()
-            #
-            #         to_wallet.balance += data['amount']
-            #         to_wallet.save()
-            #
-            #         return Response({"data": "success"})
-            #     else:
-            #         return Response({"error": "404 NOT FUNDS FOUND"})
-            # except:
-            #     return Response({"error": "ALIENS!"})
+            return Response({"data": "redirecting to balance home page"})
         else:
             return Response({"error": 'NOTHING TO DO HERE :D'})
