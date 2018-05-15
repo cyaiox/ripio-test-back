@@ -1,8 +1,13 @@
 from rest_framework.authentication import TokenAuthentication, get_authorization_header
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authtoken.models import Token
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.conf import settings
 from datetime import datetime, timedelta
 import pytz
+
+
+AUTH_TTL = getattr(settings, 'AUTH_TTL', 15)
 
 
 class ExpiringTokenAuthentication(TokenAuthentication):
@@ -19,7 +24,7 @@ class ExpiringTokenAuthentication(TokenAuthentication):
         utc_now = datetime.utcnow()
         utc_now = utc_now.replace(tzinfo=pytz.utc)
 
-        if token.created < utc_now - timedelta(minutes=15):
+        if token.created < utc_now - timedelta(minutes=AUTH_TTL):
             raise AuthenticationFailed('Token has expired')
         else:
             token.created = utc_now
