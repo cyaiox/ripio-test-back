@@ -19,7 +19,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token 22cbe6823d15c6307f5240968edd99a5ae65c12a"
+								"value": "Token ad56c101111fe705549a70cf9c9d7899c6982f24"
 							}
 						],
 						"body": {},
@@ -45,7 +45,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token 22cbe6823d15c6307f5240968edd99a5ae65c12a"
+								"value": "Token ad56c101111fe705549a70cf9c9d7899c6982f24"
 							},
 							{
 								"key": "Content-Type",
@@ -54,7 +54,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"from_wallet\": \"zmjqgF\",\n\t\"to_wallet\": \"o7cexL\",\n\t\"amount\": 800\n}"
+							"raw": "{\n\t\"from_wallet\": \"zmjqgF\",\n\t\"to_wallet\": \"o7cexL\",\n\t\"amount\": 200\n}"
 						},
 						"url": {
 							"raw": "localhost:8000/transfers/",
@@ -64,6 +64,37 @@
 							"port": "8000",
 							"path": [
 								"transfers",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Coin",
+			"description": "",
+			"item": [
+				{
+					"name": "Coins",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 4d15fec42afee3bba7ecea1f2083720c953fd5ae"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "localhost:8000/coins/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"coins",
 								""
 							]
 						}
