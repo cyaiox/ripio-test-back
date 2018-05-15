@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', AuthToken.as_view()),
-    path('transfers/', include('balance.urls'))
+    path('transfers/', include('balance.urls')),
+    path('coins/', include('coin.urls'))
 ]
