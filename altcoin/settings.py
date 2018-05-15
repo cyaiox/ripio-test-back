@@ -142,7 +142,7 @@ CACHES = {
     }
 }
 
-CACHE_TTL = 60 * 60 * 24
+CACHE_TTL = 60 * 15
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
