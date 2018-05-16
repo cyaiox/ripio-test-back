@@ -9,3 +9,4 @@ Celery==4.1.0
 amqp==2.2.2
 django-redis
 msgpack-python
+django-cors-headers

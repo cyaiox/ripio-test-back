@@ -1,80 +1,158 @@
 {
 	"info": {
-		"_postman_id": "fddbe7d0-c0f4-417f-bf8f-40efe8dd3ec7",
+		"_postman_id": "5c12e172-1c0e-4c7b-835c-5d9835ecfe78",
 		"name": "API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Balance",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "Transfers",
-					"request": {
-						"auth": {
-							"type": "noauth"
+					"description": "",
+					"item": [
+						{
+							"name": "Transfers",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:8000/balance/transfers/zmjqgF/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"balance",
+										"transfers",
+										"zmjqgF",
+										""
+									]
+								}
+							},
+							"response": []
 						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Token ad56c101111fe705549a70cf9c9d7899c6982f24"
-							}
-						],
-						"body": {},
-						"url": {
-							"raw": "localhost:8000/transfers/zmjqgF/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"transfers",
-								"zmjqgF",
-								""
-							]
+						{
+							"name": "Transfers",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"from_wallet\": \"zmjqgF\",\n\t\"to_wallet\": \"o7cexL\",\n\t\"amount\": 200\n}"
+								},
+								"url": {
+									"raw": "localhost:8000/balance/transfers/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"balance",
+										"transfers",
+										""
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "Transfers",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Token ad56c101111fe705549a70cf9c9d7899c6982f24"
+					"name": "Wallet",
+					"description": "",
+					"item": [
+						{
+							"name": "Wallets",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "localhost:8000/balance/wallets/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"balance",
+										"wallets",
+										""
+									]
+								}
 							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"from_wallet\": \"zmjqgF\",\n\t\"to_wallet\": \"o7cexL\",\n\t\"amount\": 200\n}"
+							"response": []
 						},
-						"url": {
-							"raw": "localhost:8000/transfers/",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"transfers",
-								""
-							]
+						{
+							"name": "Wallets",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"coin\": 1\n}"
+								},
+								"url": {
+									"raw": "localhost:8000/balance/wallets/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"balance",
+										"wallets",
+										""
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"_postman_isSubFolder": true
 				}
 			]
 		},
 		{
 			"name": "Coin",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "Coins",
@@ -83,10 +161,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token 4d15fec42afee3bba7ecea1f2083720c953fd5ae"
+								"value": "Token {{token}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "localhost:8000/coins/",
 							"host": [
@@ -114,13 +195,11 @@
 						{
 							"key": "username",
 							"value": "admin",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "password",
 							"value": "abcd1234+",
-							"description": "",
 							"type": "text"
 						}
 					]
