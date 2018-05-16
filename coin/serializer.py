@@ -5,4 +5,4 @@ from .models import Coin
 class CoinSerializer(ModelSerializer):
     class Meta:
         model = Coin
-        fields = ('name', 'description', 'symbol')
+        fields = ('id', 'name', 'description', 'symbol')

@@ -1,4 +1,4 @@
-from rest_framework.permissions import IsAdminUserOrReadOnly
+from altcoin.authentication import IsAdminUserOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 from .models import Coin
 from .serializer import CoinSerializer

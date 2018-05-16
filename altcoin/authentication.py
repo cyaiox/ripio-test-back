@@ -1,7 +1,7 @@
-from rest_framework.authentication import TokenAuthentication, get_authorization_header
+from rest_framework import permissions
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authtoken.models import Token
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.conf import settings
 from datetime import datetime, timedelta
 import pytz
@@ -32,3 +32,11 @@ class ExpiringTokenAuthentication(TokenAuthentication):
 
         return token.user, token
 
+
+class IsAdminUserOrReadOnly(permissions.BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        return request.user.is_staff
