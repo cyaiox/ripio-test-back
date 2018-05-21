@@ -124,10 +124,12 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 25
 }
 
-AUTH_TTL = 60 * 24
+AUTH_TTL = 60 * 60 * 24
 
 # Celery
 CELERY_BROKER_URL = 'redis://localhost:6379/0'

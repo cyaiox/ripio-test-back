@@ -5,17 +5,28 @@ from .models import Transfers, Wallet
 from coin.models import Coin
 from .serializer import TransferSerializer, WalletSerializer
 from .tasks import transfer_money_between_wallets
+from .pagination import CustomPagination
 
 
 class TransferView(APIView):
+    pagination_class = CustomPagination
+    
     def get(self, request, wallet=None):
+        self.paginated_by = self.request.query_params.get('paginated_by', 25)
+        sort_by = self.request.query_params.get('sort_by', None).split(".")        
+
         if wallet:
             try:
                 wallet = Wallet.objects.get(pk=wallet)
 
+                order_by = 'date_time'
+
+                if sort_by is not None:
+                    order_by = sort_by[0] if sort_by[1] == "desc" else "-" + sort_by[0]
+
                 transfers = Transfers.objects.filter(
                     Q(from_wallet=wallet) | Q(to_wallet=wallet)
-                )
+                ).order_by(order_by)
 
                 return Response({
                     "transactions": TransferSerializer(transfers, many=True).data,
