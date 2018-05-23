@@ -1,5 +1,8 @@
 from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView, ListAPIView
+from rest_framework.mixins import ListModelMixin
 from rest_framework.response import Response
+from rest_framework.pagination import LimitOffsetPagination
 from django.db.models import Q
 from .models import Transfers, Wallet
 from coin.models import Coin
@@ -9,11 +12,11 @@ from .pagination import CustomPagination
 
 
 class TransferView(APIView):
-    pagination_class = CustomPagination
     
     def get(self, request, wallet=None):
-        self.paginated_by = self.request.query_params.get('paginated_by', 25)
-        sort_by = self.request.query_params.get('sort_by', None).split(".")        
+        paginated_by = request.query_params.get('paginated_by', 5)
+        sort_by = request.query_params.get('sort_by', None).split(".")
+        paginator = LimitOffsetPagination()
 
         if wallet:
             try:
@@ -28,10 +31,14 @@ class TransferView(APIView):
                     Q(from_wallet=wallet) | Q(to_wallet=wallet)
                 ).order_by(order_by)
 
-                return Response({
-                    "transactions": TransferSerializer(transfers, many=True).data,
-                    "balance": wallet.balance
-                })
+                result_page = paginator.paginate_queryset(transfers, request)
+
+                serializer = TransferSerializer(result_page, many=True, context={'request':request})
+                return Response(serializer.data)
+                #return Response({
+                #    "transactions": TransferSerializer(result_page, many=True, context={'request':request}).data,
+                #    "balance": wallet.balance
+                #})
             except:
                 return Response({"error": "This is not a valid wallet."})
         
@@ -51,7 +58,7 @@ class TransferView(APIView):
         else:
             return Response({"error": 'NOTHING TO DO HERE :D'})
 
-
+    
 class WalletView(APIView):
 
     def get(self, request):
