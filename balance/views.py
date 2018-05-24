@@ -16,29 +16,25 @@ class TransferView(APIView):
     def get(self, request, wallet=None):
         paginated_by = request.query_params.get('paginated_by', 5)
         sort_by = request.query_params.get('sort_by', None).split(".")
-        paginator = LimitOffsetPagination()
+        paginator = CustomPagination()
 
         if wallet:
             try:
                 wallet = Wallet.objects.get(pk=wallet)
 
-                order_by = 'date_time'
+                order_by = '-date_time'
 
                 if sort_by is not None:
-                    order_by = sort_by[0] if sort_by[1] == "desc" else "-" + sort_by[0]
+                    order_by = sort_by[0] if sort_by[1] == "asc" else "-" + sort_by[0]
 
                 transfers = Transfers.objects.filter(
                     Q(from_wallet=wallet) | Q(to_wallet=wallet)
                 ).order_by(order_by)
 
-                result_page = paginator.paginate_queryset(transfers, request)
-
-                serializer = TransferSerializer(result_page, many=True, context={'request':request})
-                return Response(serializer.data)
-                #return Response({
-                #    "transactions": TransferSerializer(result_page, many=True, context={'request':request}).data,
-                #    "balance": wallet.balance
-                #})
+                return Response({
+                    "transactions": TransferSerializer(transfers, many=True).data,
+                    "balance": wallet.balance
+                })
             except:
                 return Response({"error": "This is not a valid wallet."})
         
