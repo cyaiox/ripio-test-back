@@ -55,7 +55,7 @@ class TransferView(APIView):
             return Response({"error": 'NOTHING TO DO HERE :D'})
 
     
-class WalletView(APIView):
+class WalletsView(APIView):
 
     def get(self, request):
         try:
@@ -66,6 +66,34 @@ class WalletView(APIView):
             return Response({"error": "404 WALLETS NOT FOUND"})
 
     def post(self, request):
+        try:
+            if request.POST or request.data:
+                data = request.POST or request.data
+
+                wallet = Wallet(user=request.user,
+                                coin=Coin.objects.get(pk=data['coin']))
+
+                wallet.save()
+
+                return Response({"data": WalletSerializer(wallet).data})
+        except:
+            return Response({"error": "500 WRONG WAY"})
+
+
+class WalletView(APIView):
+
+    def get(self, request, wallet=None):
+        try:
+            if wallet:
+                wallet = Wallet.objects.get(pk=wallet)
+
+                return Response({"data": WalletSerializer(wallet).data})
+
+            return Response({"error": "Wallet not provided"})
+        except:
+            return Response({"error": "404 WALLETS NOT FOUND"})
+
+    def post(self, request, wallet=None):
         try:
             if request.POST or request.data:
                 data = request.POST or request.data
