@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import Transfers, Wallet
+from coin.serializer import CoinSerializer
 
 
 class TransferSerializer(ModelSerializer):
@@ -10,6 +11,8 @@ class TransferSerializer(ModelSerializer):
 
 
 class WalletSerializer(ModelSerializer):
+    coin = CoinSerializer(read_only=True)
+
     class Meta:
         model = Wallet
         fields = ('id', 'balance', 'coin')
