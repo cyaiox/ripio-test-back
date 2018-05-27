@@ -4,6 +4,7 @@ from coin.models import Coin
 import datetime
 import string
 import random
+from django.utils import timezone
 
 
 def id_generator(size=6, chars=string.ascii_letters + string.digits):
@@ -34,4 +35,4 @@ class Transfers(models.Model):
     to_wallet = models.ForeignKey(Wallet, related_name='transfer_to_wallet', on_delete=None)
     amount = models.IntegerField()
     status = models.CharField(max_length=1, choices=STATUS, default='W')
-    date_time = models.DateTimeField(default=datetime.datetime.now)
+    date_time = models.DateTimeField(default=timezone.now)

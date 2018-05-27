@@ -140,14 +140,24 @@ CELERY_RESULT_SERIALIZER = 'pickle'
 CELERY_TIMEZONE = 'UTC'
 
 # Redis
+#CACHES = {
+#    'default': {
+#        'BACKEND': 'django_redis.cache.RedisCache',
+#        'LOCATION': 'redis://127.0.0.1:6379/0',
+#        'OPTIONS': {
+#            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#            'SERIALIZER': 'django_redis.serializers.msgpack.MSGPackSerializer',
+#            'COMPRESSOR': 'django_redis.compressors.zlib.ZlibCompressor'
+#        },
+#    }
+#}
+
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': 'redis://127.0.0.1:6379/0',
         'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            "SERIALIZER": "django_redis.serializers.msgpack.MSGPackSerializer",
-            "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor"
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient'
         },
     }
 }

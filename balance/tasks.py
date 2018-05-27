@@ -16,9 +16,10 @@ def setup_periodic_task(sender, **kwargs):
 @task
 def transfer_money_between_wallets(from_wallet, to_wallet, amount):
     try:
+        print("Before get wallets")
         from_wallet = Wallet.objects.get(pk=from_wallet)
         to_wallet = Wallet.objects.get(pk=to_wallet)
-
+        amount = int(amount)
         if from_wallet.balance - (from_wallet.escrow + amount) >= 0:
             transfer = Transfers(
                 from_wallet=from_wallet,
