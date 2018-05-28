@@ -5,6 +5,6 @@ from .serializer import CoinSerializer
 
 
 class CoinViewSet(ModelViewSet):
-    queryset = Coin.objects.all()
+    queryset = Coin.objects.filter(approved=True)
     serializer_class = CoinSerializer
     permission_classes = [IsAdminUserOrReadOnly]
