@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from profiles.views import AuthToken
+from profiles.views import AuthToken, UserCreate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', AuthToken.as_view()),
     path('balance/', include('balance.urls')),
-    path('coins/', include('coin.urls'))
+    path('coins/', include('coin.urls')),
+    path('signup/', UserCreate.as_view(), name='signup')
 ]

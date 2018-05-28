@@ -2,9 +2,11 @@ from rest_framework import permissions
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authtoken.models import Token
+#from rest_framework.views import APIView
 from django.conf import settings
 from datetime import datetime, timedelta
 import pytz
+from profiles.serializer import UserSerializer
 
 
 AUTH_TTL = getattr(settings, 'AUTH_TTL', 15)
@@ -40,3 +42,19 @@ class IsAdminUserOrReadOnly(permissions.BasePermission):
             return True
 
         return request.user.is_staff
+
+
+#class UserCreate(APIView):
+#    def post(self, request, format='json'):
+#        data = request.data or request.post
+#        serializer = UserSerializer(data=data)
+#        if serializer.is_valid():
+#            user = serializer.save()
+#            if user:
+#                token = Token.objects.create(user=user)
+#                return Response({
+#                    'token': token.key,
+#                    'user': serializer.data
+#                }, status=status.HTTP_201_CREATED)
+#        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+

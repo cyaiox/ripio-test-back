@@ -50,7 +50,7 @@ class TransferView(APIView):
                 data['amount']
             )
 
-            return Response({"data": "redirecting to balance home page"})
+            return Response("redirecting to balance home page")
         else:
             return Response({"error": 'NOTHING TO DO HERE :D'})
 
@@ -61,7 +61,7 @@ class WalletsView(APIView):
         try:
             wallets = Wallet.objects.filter(user=request.user)
 
-            return Response({"data": WalletSerializer(wallets, many=True).data})
+            return Response(WalletSerializer(wallets, many=True).data)
         except:
             return Response({"error": "404 WALLETS NOT FOUND"})
 
@@ -87,7 +87,7 @@ class WalletView(APIView):
             if wallet:
                 wallet = Wallet.objects.get(pk=wallet)
 
-                return Response({"data": WalletSerializer(wallet).data})
+                return Response(WalletSerializer(wallet).data)
 
             return Response({"error": "Wallet not provided"})
         except:
