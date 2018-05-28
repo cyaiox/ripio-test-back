@@ -1,6 +1,10 @@
 .idea/
 *.pyc
 __pycache__/
+__pycache__/*.pyc
+*/__pycache__/
+*/__pycache__/*.pyc
+*/**/*.pyc
 .vscode
 *.rdb
 celerybeat-schedule
